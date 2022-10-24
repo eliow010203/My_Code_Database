@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  *{margin: 0px; padding: 0px;
+  width: 100%;
+  height: 100%;
+  }
+
+  body{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .bigbox{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    
+  }
+
+  /* #bigbox:hover{
+    transform: translateX(100px);
+  } */
+
+  .theBox{
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    
+  }
+
+  .item01{
+    top: 30%;
+    right: 30%;
+  }
+  .item02{}
+  .item03{
+    top: 70%;
+    right: 70%;
+  }
+</style>
+<body>
+  
+  <div class="bigbox">
+  <div class="theBox item01"></div>
+  <div class="theBox item02"></div>
+  <div class="theBox item03"></div>
+  </div>
+
+  <script defer>
+    window.addEventListener('mousemove',function(e) {
+      const wsize = ((window.innerWidth/2)-(e.clientX))
+      const hsize = ((window.innerHeight/2)-(e.clientY))*-1
+      const itemX = wsize/5
+      const itemY = hsize/5
+      console.log(itemX, itemY)
+      document.querySelector('.bigbox').style.right=`${itemX}px`
+      document.querySelector('.bigbox').style.top=`${itemY}px`
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            /* background-color: #111; */
+        }
+        #bigframe{
+            overflow: hidden;
+            width: 1000px;
+            height: 200px;
+            margin: 0px auto;
+            margin-top: 200px;
+        }
+        
+        #frame{
+            right: 300px;
+            top: -300px;
+            width: 1600px;
+            height: 800px;
+            position: relative;
+        }
+
+        #frame div{
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            position: absolute;
+            filter: blur(50px);
+            mix-blend-mode:lighten;
+        }
+
+        #button{
+            width: 150px;
+            height: 50px;
+            border: 3px solid #333;
+            border-radius: 50px;
+            background-color: #fff;
+            margin: 0px auto;
+            margin-top: 250px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 50px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="bigframe">
+        <div id="frame"></div>
+    </div>
+
+    <div id="button">버튼을 클릭하세요</div>
+
+    <script>
+        let itemContain = document.getElementById('frame')
+        let itemContainChild = itemContain.childNodes
+        let timeNum = 0
+        let buttonEl = document.getElementById('button')
+        
+        let coolTime = 300
+        let speed = 5
+        let returnTime = 0
+        
+        function alwaysRun() {
+            timeNum++
+            coolTime++
+            returnTime++
+
+            for (let i=0; i<itemContainChild.length; i++) {
+                itemContainChild[i].style.left=`${(timeNum-(itemContainChild[i].id))*speed-100}px`
+                if(((timeNum-(itemContainChild[i].id))*speed+100)>=1600){
+                    itemContainChild[i].remove()
+                }
+                if(itemContainChild.length>=15){
+                    itemContainChild[i].remove()
+                }
+            }
+
+            if(coolTime>=300){
+                if(returnTime>=30){
+                    let rColor = Math.floor(Math.random()*155)+150
+                    let gColor = Math.floor(Math.random()*155)+150
+                    let bColor = Math.floor(Math.random()*155)+150
+                    let ranNum = Math.floor(Math.random()*300)+100
+                    let create = document.createElement('div')
+                    itemContain.appendChild(create)
+                    create.setAttribute('id',timeNum)
+                    create.style.top=`${ranNum}px`
+                    create.style.background=`radial-gradient(circle, rgba(${rColor},${gColor},${bColor},1) 0%, rgba(0,255,255,0) 100%)`
+                    returnTime=0
+                }
+            }
+
+
+            requestAnimationFrame(alwaysRun)
+        }
+        alwaysRun()
+
+        buttonEl.addEventListener('click',function() {
+            let rColor = Math.floor(Math.random()*155)+150
+            let gColor = Math.floor(Math.random()*155)+150
+            let bColor = Math.floor(Math.random()*155)+150
+            let ranNum = Math.floor(Math.random()*300)+100
+            let create = document.createElement('div')
+            itemContain.appendChild(create)
+            create.setAttribute('id',timeNum)
+            create.style.top=`${ranNum}px`
+            create.style.background=`radial-gradient(circle, rgba(${rColor},${gColor},${bColor},1) 0%, rgba(0,255,255,0) 100%)`
+            coolTime = 0
+        })
+    </script>
+    
+</body>
+</html>

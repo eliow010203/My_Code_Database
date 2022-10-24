@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #wrap{
+      position: relative;
+      width: 400px;
+      height: 400px;
+      background-color: #ccc;
+      border-radius: 50%;
+    }
+    .item{
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: #333;
+      top: 0px;
+      right: 150px;
+      border-radius: 50%;
+    }
+    #size{
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      box-sizing: border-box;
+      border-radius: 50%;
+      border: 3px solid #000;
+      margin-top: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap"></div>
+  <div id="size"></div>
+  
+  <script>
+    let wrapEl = document.getElementById('wrap')
+    let wrapStyle = getComputedStyle(wrapEl)
+    let item = document.getElementsByClassName('item')
+    let size = document.getElementById('size')
+    let bodyEl = document.body
+    let n = 0
+    
+
+    wrapEl.addEventListener('mousedown',function (v) {
+      console.log('adada')
+      let wdis = 200-v.offsetX
+      let hdis = 200-v.offsetY
+      let dist = Math.sqrt(wdis**2+hdis**2)
+      size.style.transform=`scale(${dist/3})`
+      n = 1
+    })
+
+    wrapEl.addEventListener('mousemove',function (e) {
+      let wrapX = wrapStyle.width
+      let wrapY = wrapStyle.height
+      const regex = /[^0-9]/g;
+      let wrapNumX = wrapX.replace(regex, "")
+      let wrapNumY = wrapY.replace(regex, "")
+      let wdis = 200-e.offsetX
+      let hdis = 200-e.offsetY
+      let dist = Math.sqrt(wdis**2+hdis**2)
+      if(n==1){
+        console.log(dist)
+        size.style.transform=`scale(${dist/3})`
+        // console.log(wrapNumX/2, wrapNumY/2)
+      }
+    })
+
+    bodyEl.addEventListener('mouseup',function() {
+      console.log('asdwa')
+      n = 0
+    })
+  </script>
+</body>
+</html>

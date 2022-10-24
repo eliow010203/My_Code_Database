@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="container"></div>
+  
+  <script>
+    let contain = document.getElementById('container') //부모위치 불러오기
+    let containchild = contain.childNodes
+    let child = document.createElement("div"); //엘리먼트 생성
+    let frimeNum = 473298
+    contain.appendChild(child) //부모안에 생성한 엘리먼트 배치
+    containchild[0].setAttribute('id',frimeNum) //부모태그안에 있는 첫번째 자식 즉 생성한 요소의 id를 div01로 지정
+    let div01 = document.getElementById(frimeNum) //변수 div01에 id가 div01인 요소 불러오기
+    div01.style.width='100px' //div01스타일 너비 서식
+    div01.style.height='100px' //div01스타일 높이 서식
+    div01.style.backgroundColor='black' //div01스타일 서식
+    console.log(div01.style.width) //console창에 div01의 스타일중 width값을 표시
+    console.log(1000000-(div01.id))
+  </script>
+
+</body>
+</html>
