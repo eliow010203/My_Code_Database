@@ -1,5 +1,3 @@
-# aaaaaaaaa
+# Alpha
 
 For Javascript & Css & Html
-
-||aaaaaaaa||
