@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .xline{
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>js 2차원 배열</h2>
+  <p>ctrl을 꾹 눌러 재정렬</p>
+  <input type="text" id="text">
+  <div id="wrap"></div>
+
+  <script>
+    let xarr = new Array(5)
+    let yarr = new Array(5)
+
+    window.addEventListener('keydown',function(){
+      let wrapre = document.getElementById('wrap').childNodes
+      for(i=0;i<wrapre.length;i++){
+        wrapre[i].remove()
+      }
+    })
+    window.addEventListener('keyup',function(){
+      let input = document.getElementById('text').value
+      let wrap = document.getElementById('wrap')
+
+      xarr.fill(yarr)
+      yarr.fill(input)
+      console.log(xarr)
+      for(xi=0;xi<xarr.length;xi++){
+        let create = document.createElement('div')
+        create.setAttribute('id',xi)
+        create.setAttribute('class',"xline")
+        wrap.appendChild(create)
+        yin(xi)
+      }
+
+      function yin(t){
+        for(yi=0;yi<yarr.length;yi++){
+          let craft = document.createElement('div')
+          craft.setAttribute('id',yi)
+          craft.setAttribute('class',"yline")
+          craft.innerText=`${input}`
+          document.getElementsByClassName('xline')[t].appendChild(craft)
+        }
+
+      }
+
+    })
+  </script>
+
+
+</body>
+</html>
