@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body *{
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+
+
+        .wrap{
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #item_contain{
+            width: 400%;
+            height: 100%;
+            background-color: #fff;
+            position: relative;
+            top: 0px;
+            transition: .3s;
+        }
+        .page{
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0px;
+            overflow: hidden;
+        }
+
+        #head{
+            position: fixed;
+            top: 0px;
+            z-index: 10;
+            width: 100vw;
+            height: 60px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px #000;
+        }
+
+        #head span{
+            position: absolute;
+            right: 10px;
+            width: 50px;
+            height: 60px;
+            line-height: 60px;
+            font-size: 50px;
+            color: #111;
+            display: block;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #pagename{
+            color: #111;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 60px;
+            height: 60px;
+            width: 170px;
+            left: 25px;
+            position: absolute;
+        }
+
+        .page01{
+            background-color: #ccc;
+            left: 0%;
+        }
+        .page02{
+            background-color: #fff;
+            left: 100vw;
+        }
+        .page03{
+            background-color: #ccc;
+            left: 200vw;
+        }
+        .page04{
+            background-color: #fff;
+            left: 300vw;
+        }
+
+        #sub_contain{
+            z-index: 20;
+            position: absolute;
+            top: 0px;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            transition: .3s;
+            pointer-events: none;
+        }
+        
+        #sub_bg{
+            transition: .3s;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(0, 0, 0, .4);
+            position: absolute;
+            transition: .3s;
+            
+        }
+
+        #sub_wrap{
+            width: 400px;
+            height: 100vh;
+            background-color: #fff;
+            position: absolute;
+            /* right: -100px; */
+            overflow: hidden;
+            border-radius: 50px;
+            box-shadow: 0px 0px 10px #000;
+            transition: .3s;
+            pointer-events: all;
+        }
+
+        .sub_head{
+            width: 100%;
+            height: 60px;
+            position: relative;
+            box-shadow: 0px 0px 10px #000;
+            z-index: 10;
+        }
+
+        .sub_head span{
+            position: absolute;
+            right: 110px;
+            font-size: 50px;
+            line-height: 60px;
+            height: 60px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .search_bar{
+            height: 200px;
+            width: 80%;
+            background-image: url(./img/pattern.webp);
+            background-size: cover;
+            border-bottom: 1px solid #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search_bg{
+            position: absolute;
+            background-color: rgba(0, 0, 0, .2);
+            width: 120%;
+            height: 100%;
+            top: 0px;
+        }
+
+        .search_form{
+            position: absolute;
+            width: 80%;
+            height: 40px;
+            background-color: #fff;
+            z-index: 5;
+            top: 65%;
+            left: 50%;
+            transform: translateX(-55%);
+            border-radius: 50px;
+            box-shadow: 0px 0px 10px #000;
+        }
+
+        .search_form input{
+            top: 5px;
+            border: none;
+            position: absolute;
+            width: 75%;
+            height: 30px;
+            left: 15px;
+            /* border-bottom: 2px solid #111; */
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .search_form span{
+            top: 5px;
+            border: none;
+            position: absolute;
+            right: 15px;
+            /* border-bottom: 2px solid #111; */
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #menu{
+            width: 80%;
+            height: 70px;
+            border-radius: 50px;
+            background-color: #fff;
+            position: fixed;
+            margin: 0px auto;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0px 6px 17px #00000070;
+        }
+
+        #menu_wrap{
+            width: 80%;
+            height: 100%;
+            /* background-color: aqua; */
+            position: relative;
+            margin: 0px auto;
+        }
+
+        #menu_wrap p{
+            margin-top: 5px;
+            width: 20%;
+            height: 40px;
+            line-height: 40px;
+            /* background-color: #ccc; */
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #menu_wrap p span{
+            line-height: unset;
+            font-size: 35px;
+            color: #111;
+            user-select: none;
+        }
+
+        #text_wrap{
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #select{
+            width: 20%;
+            height: 5px;
+            border-radius: 10px;
+            background-color: #111;
+            position: absolute;
+            bottom: 12px;
+            transition: .3s;
+        }
+
+        .content_contain{
+            display: flex;
+            width: 300px;
+            height: 200px;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .inner_item{
+            height: 90px;
+        }
+
+        .inner_item p{
+            width: 100%;
+            line-height: 40px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .inner_item div{
+            height: 55px;
+            width: 55px;
+            background-color: #fff;
+            border-radius: 50%;
+            /* border: 3px solid #333; */
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div id="head"><p id="pagename">asasas</p><span class="material-icons" id="sub_open"> menu </span></div>
+        <div id="item_contain">
+            <div class="page01 page">
+                <div class=""></div>
+            </div>
+            <div class="page02 page">
+            </div>
+            <div class="page03 page">
+            </div>
+            <div class="page04 page">
+            </div>
+        </div>
+        
+        <div id="sub_contain">
+            <div id="sub_bg"></div>
+            <div id="sub_wrap">
+                <div class="sub_head">
+                    <span class="material-icons" id="sub_close"> close </span>
+                </div>
+                <div class="search_bar">
+                    <div class="search_bg"></div>
+                    <div class="search_form">
+                        <input type="search" placeholder="검색어를 입력하세요.">
+                        <span class="material-icons"> search </span>
+                    </div>
+                </div>
+                <div class="content_contain">
+                    <div class="inner_item">
+                        <div></div>
+                        <p>메뉴1</p>
+                    </div>
+                    <div class="inner_item">
+                        <div></div>
+                        <p>메뉴2</p>
+                    </div>
+                    <div class="inner_item">
+                        <div></div>
+                        <p>메뉴3</p>
+                    </div>
+                    <div class="inner_item">
+                        <div></div>
+                        <p>메뉴4</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="menu">
+        <div id="menu_wrap">
+            <div id="text_wrap">
+                <p id="m01"><span class="material-icons"> explore </span></p>
+                <p id="m02"><span class="material-icons"> flight </span></p>
+                <p id="m03"><span class="material-icons"> map </span></p>
+                <p id="m04"><span class="material-icons"> account_circle </span></p>
+            </div>
+            <div id="select"></div>
+        </div>
+    </div>
+    
+
+    <script>
+        const m01 = document.getElementById('m01')
+        const m02 = document.getElementById('m02')
+        const m03 = document.getElementById('m03')
+        const m04 = document.getElementById('m04')
+        const selectEl = document.getElementById('select')
+        const pageEl = document.getElementById('item_contain')
+        const pageNEl = document.getElementById('pagename')
+        const pagename = ['탐색','여행','지도','내 정보']
+
+        const sub_all = document.getElementById('sub_contain')
+        const sub_bg = document.getElementById('sub_bg')
+        const subEl = document.getElementById('sub_wrap')
+        const sub_open = document.getElementById('sub_open')
+        const sub_close = document.getElementById('sub_close')
+        
+        subpage(0)
+
+        m01.addEventListener('click',function(){sel(0)})
+        m02.addEventListener('click',function(){sel(1)})
+        m03.addEventListener('click',function(){sel(2)})
+        m04.addEventListener('click',function(){sel(3)})
+
+        sub_bg.addEventListener('click',function(){subpage(0)})
+        sub_open.addEventListener('click',function(){subpage(1)})
+        sub_close.addEventListener('click',function(){subpage(0)})
+
+        
+        function subpage(num1) {
+            if(num1==1){
+                sub_bg.style.pointerEvents=`all`
+                sub_bg.style.opacity=`1`
+                subEl.style.right=`-100px`
+            }
+
+            if(num1==0){
+                sub_bg.style.pointerEvents=`none`
+                sub_bg.style.opacity=`0`
+                subEl.style.right=`-550px`
+            }
+        }
+
+        let selW
+        sel(0)
+        function sel(num) {
+            selW=20*num
+            pageEl.style.left=`${-100*num}vw`
+            selectEl.style.left=`${selW+(5*num)+2.5}%`
+            pageNEl.innerText=`${pagename[num]}`
+        }
+
+    </script>
+</body>
+</html>
