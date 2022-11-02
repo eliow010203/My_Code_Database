@@ -31,7 +31,7 @@
             background-color: #fff;
             position: relative;
             top: 0px;
-            transition: .3s;
+            /* transition: .3s; */
         }
         .page{
             width: 100vw;
@@ -371,6 +371,86 @@
         sub_open.addEventListener('click',function(){subpage(1)})
         sub_close.addEventListener('click',function(){subpage(0)})
 
+        let on =0
+        let scrX = 0
+        let scrpX = 0
+        let winXper = (window.innerWidth/100)
+
+
+
+
+
+        window.addEventListener('mousedown',function(e1){
+            on=1
+            scrX = e1.pageX
+        })
+        window.addEventListener('mouseup',function(e2){
+            on=0
+            scrpX=(scrpX+(((scrX-e2.pageX))/winXper))
+            if(scrpX<0){
+                scrpX=0
+            }
+
+            if(scrpX>300){
+                scrpX=300
+            }
+        })
+        window.addEventListener('mousemove',function(e3){
+            if(on==1){
+                // console.log(pageEl.style.left)
+                pageEl.style.transition=`0s`
+                pageEl.style.left=`${(scrpX+(((scrX-e3.pageX))/winXper))*-1}vw`
+                console.log((scrpX+(((scrX-e3.pageX))/winXper))*-1)
+                if(((scrpX+(((scrX-e3.pageX))/winXper))*-1)>0){
+                    pageEl.style.left=`0vw`
+                }
+
+                if(((scrpX+(((scrX-e3.pageX))/winXper))*-1)<-300){
+                    pageEl.style.left=`-300vw`
+                }
+            }
+        })
+
+
+
+
+        window.addEventListener('touchstart',function(e1){
+            on=1
+            scrX = e1.pageX
+        })
+        window.addEventListener('touchmove',function(e2){
+            on=0
+            scrpX=(scrpX+(((scrX-e2.pageX))/winXper))
+            if(scrpX<0){
+                scrpX=0
+            }
+
+            if(scrpX>300){
+                scrpX=300
+            }
+        })
+        window.addEventListener('touchend',function(e3){
+            if(on==1){
+                // console.log(pageEl.style.left)
+                pageEl.style.transition=`0s`
+                pageEl.style.left=`${(scrpX+(((scrX-e3.pageX))/winXper))*-1}vw`
+                console.log((scrpX+(((scrX-e3.pageX))/winXper))*-1)
+                if(((scrpX+(((scrX-e3.pageX))/winXper))*-1)>0){
+                    pageEl.style.left=`0vw`
+                }
+
+                if(((scrpX+(((scrX-e3.pageX))/winXper))*-1)<-300){
+                    pageEl.style.left=`-300vw`
+                }
+            }
+        })
+
+
+
+
+
+        
+        
         
         function subpage(num1) {
             if(num1==1){
@@ -389,7 +469,10 @@
         let selW
         sel(0)
         function sel(num) {
+            scrpX = 100*num
+            console.log(scrpX)
             selW=20*num
+            pageEl.style.transition=`.3s`
             pageEl.style.left=`${-100*num}vw`
             selectEl.style.left=`${selW+(5*num)+2.5}%`
             pageNEl.innerText=`${pagename[num]}`
