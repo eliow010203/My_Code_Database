@@ -400,7 +400,7 @@
                 // console.log(pageEl.style.left)
                 pageEl.style.transition=`0s`
                 pageEl.style.left=`${(scrpX+(((scrX-e3.pageX))/winXper))*-1}vw`
-                console.log((scrpX+(((scrX-e3.pageX))/winXper))*-1)
+                // console.log((scrpX+(((scrX-e3.pageX))/winXper))*-1)
                 if(((scrpX+(((scrX-e3.pageX))/winXper))*-1)>0){
                     pageEl.style.left=`0vw`
                 }
@@ -412,15 +412,16 @@
         })
 
 
+        tscrpX=0
 
-
-        window.addEventListener('touchstart',function(e1){
+        window.addEventListener('touchstart',function(e4){
             on=1
-            scrX = e1.pageX
+            scrX = e4.targetTouches.item(0).pageX
+            console.log(scrX)
         })
-        window.addEventListener('touchmove',function(e2){
+        window.addEventListener('touchend',function(e5){
             on=0
-            scrpX=(scrpX+(((scrX-e2.pageX))/winXper))
+            scrpX=tscrpX
             if(scrpX<0){
                 scrpX=0
             }
@@ -429,19 +430,20 @@
                 scrpX=300
             }
         })
-        window.addEventListener('touchend',function(e3){
+        window.addEventListener('touchmove',function(e6){
             if(on==1){
                 // console.log(pageEl.style.left)
                 pageEl.style.transition=`0s`
-                pageEl.style.left=`${(scrpX+(((scrX-e3.pageX))/winXper))*-1}vw`
-                console.log((scrpX+(((scrX-e3.pageX))/winXper))*-1)
-                if(((scrpX+(((scrX-e3.pageX))/winXper))*-1)>0){
+                pageEl.style.left=`${(scrpX+(((scrX-e6.targetTouches.item(0).pageX))/winXper))*-1}vw`
+                // console.log((scrpX+(((scrX-e6.targetTouches.item(0).pageX))/winXper))*-1)
+                if(((scrpX+(((scrX-e6.targetTouches.item(0).pageX))/winXper))*-1)>0){
                     pageEl.style.left=`0vw`
                 }
 
-                if(((scrpX+(((scrX-e3.pageX))/winXper))*-1)<-300){
+                if(((scrpX+(((scrX-e6.targetTouches.item(0).pageX))/winXper))*-1)<-300){
                     pageEl.style.left=`-300vw`
                 }
+                tscrpX=(scrpX+(((scrX-e6.targetTouches.item(0).pageX))/winXper))
             }
         })
 
