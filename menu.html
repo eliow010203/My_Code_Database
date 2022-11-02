@@ -377,16 +377,48 @@
         let winXper = (window.innerWidth/100)
 
 
+        pagemove=0
 
 
-
+        
         window.addEventListener('mousedown',function(e1){
             on=1
             scrX = e1.pageX
         })
         window.addEventListener('mouseup',function(e2){
             on=0
-            scrpX=(scrpX+(((scrX-e2.pageX))/winXper))
+            if(scrpX>=0){
+                let nValue = scrpX/100
+                console.log(nValue)
+
+                numA = Math.abs((((scrX-e2.pageX))/winXper)-50)
+                numB = Math.abs((((scrX-e2.pageX))/winXper)+50)
+                console.log(numA)
+                console.log(numB)
+                console.log(Math.abs(numA-numB))
+                if((Math.abs(numA-numB))>=60){
+                    if(numA>numB){
+                        if(nValue==0){
+                            sel(nValue)
+                        }else{
+                            sel(nValue-1)
+                        }
+                        
+                    }
+                    
+                    if(numA<numB){
+                        if(nValue==3){
+                            sel(nValue)
+                        }else{
+                            sel(nValue+1)
+                        }
+                    }
+                }else{
+                    sel(nValue)
+                }
+            }
+
+            // scrpX=(scrpX+(((scrX-e2.pageX))/winXper))
             if(scrpX<0){
                 scrpX=0
             }
@@ -412,6 +444,9 @@
         })
 
 
+
+
+
         tscrpX=0
 
         window.addEventListener('touchstart',function(e4){
@@ -421,7 +456,38 @@
         })
         window.addEventListener('touchend',function(e5){
             on=0
-            scrpX=tscrpX
+            if(scrpX>=0){
+                let nValue = scrpX/100
+                console.log(nValue)
+
+                numA = Math.abs((tscrpX/winXper)-50)
+                numB = Math.abs((tscrpX/winXper)+50)
+                console.log(numA)
+                console.log(numB)
+                console.log(Math.abs(numA-numB))
+                if((Math.abs(numA-numB))>=15){
+                    if(numA>numB){
+                        if(nValue==0){
+                            sel(nValue)
+                        }else{
+                            sel(nValue-1)
+                        }
+                        
+                    }
+                    
+                    if(numA<numB){
+                        if(nValue==3){
+                            sel(nValue)
+                        }else{
+                            sel(nValue+1)
+                        }
+                    }
+                }else{
+                    sel(nValue)
+                }
+            }
+
+
             if(scrpX<0){
                 scrpX=0
             }
@@ -443,9 +509,11 @@
                 if(((scrpX+(((scrX-e6.targetTouches.item(0).pageX))/winXper))*-1)<-300){
                     pageEl.style.left=`-300vw`
                 }
-                tscrpX=(scrpX+(((scrX-e6.targetTouches.item(0).pageX))/winXper))
+                tscrpX=(((scrX-e6.targetTouches.item(0).pageX))/winXper)
             }
         })
+
+        
 
 
 
@@ -459,12 +527,14 @@
                 sub_bg.style.pointerEvents=`all`
                 sub_bg.style.opacity=`1`
                 subEl.style.right=`-100px`
+                pagemove=1
             }
-
+            
             if(num1==0){
                 sub_bg.style.pointerEvents=`none`
                 sub_bg.style.opacity=`0`
                 subEl.style.right=`-550px`
+                pagemove=0
             }
         }
 
@@ -472,6 +542,7 @@
         sel(0)
         function sel(num) {
             scrpX = 100*num
+            scrpvX = 100*(num+1)
             console.log(scrpX)
             selW=20*num
             pageEl.style.transition=`.3s`
