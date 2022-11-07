@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <style>
+        *{padding: 0px; margin: 0px;}
+        #over{
+            width: 600px;
+            height: 410px;
+            background-color: #e7e7e7;
+            position: relative;
+            box-shadow: 0px 0px 5px #000;
+        }
+        #top{
+            width: 100%;
+            height: 75px;
+            /* background-color: #fff; */
+            border-bottom: 1px solid #ccc;
+            position: relative;
+            
+        }
+
+        .tab_menu{
+            top: 10px;
+            height: 30px;
+            width: 260px;
+            position: absolute;
+            
+        }
+        .tab_menu>i{
+            position: absolute;
+            right: 0px;
+            top: 2px;
+            color: #333;
+        }
+        .tab{
+            height: 100%;
+            width: 220px;
+            background-color: #fff;
+            margin: 0px 7px;
+            border-radius: 10px 10px 0px 0px;
+        }
+        .tab>i{
+            position: absolute;
+            color: #333;
+            font-weight: bold;
+            right: 45px;
+            font-size: 15px;
+            top: 7.5px;
+        }
+        .pageicon{
+            position: absolute;
+            right: 0px;
+            height: 30px;
+            width: 200px;
+            /* background-color: #000; */
+            display: flex;
+            justify-content: space-around;
+            overflow: hidden;
+            /* background-color: #333; */
+        }
+        .pageicon>i{
+            color: #999;
+            width: 50px;
+            text-align: center;
+            display: block;
+        }
+        .max{
+            width: 8px;
+            height: 8px;
+            border: #999 2px solid;
+            margin: 8px auto;
+        }
+        .pi1{
+            font-size: 24px;
+            line-height: 28px;
+        }
+        .pi2{
+            font-size: 19px;
+            line-height: 18px;
+        }
+        .pi3{
+            display: block;
+            width: 50px;
+        }
+        .pi4{
+            font-size: 18px;
+            line-height: 28px;
+            transition: .1s;
+        }
+
+        .pi1:hover,.pi2:hover,.pi3:hover{
+            background-color: #c2c2c2;
+            color: #333;
+        }
+
+        .pi3:hover>.max{
+            border: #333 2px solid;
+        }
+
+        .pi4:hover{
+            background-color: red;
+            color: #fff;
+        }
+        .top_footer{
+            position: absolute;
+            bottom: 0px;
+            height: 35px;
+            width: 100%;
+            background-color: #fff;
+        }
+        #window{
+            position: absolute;
+            width: 100%;
+            height: 340px;
+            bottom: 0px;
+            /* background-color: #000; */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="over">
+        <div id="top">
+            <div class="tab_menu">
+                <div class="tab">
+                    <i class="material-icons">close</i>
+                </div>
+                <i class="material-icons">add</i>
+            </div>
+            <div class="pageicon">
+                <i class="material-icons pi1">expand_more</i>
+                <i class="material-icons pi2">minimize</i>
+                <div class="pi3">
+                    <div class="max"></div>
+                </div>
+                <i class="material-icons pi4">close</i>
+            </div>
+            <div class="top_footer">
+                <i class="material-icons">arrow_back</i>
+                <i class="material-icons">arrow_forward</i>
+                <i class="material-icons">refresh</i>
+                <div class="url"></div>
+                <div class="account"></div>
+                <i class="material-icons"></i>
+            </div>
+        </div>
+        <div id="window"></div>
+    </div>
+    
+</body>
+</html>

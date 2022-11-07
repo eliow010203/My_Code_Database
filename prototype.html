@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <style>
+        *{padding: 0px; margin: 0px;}
+        .a{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="item"></div>
+
+    <div id="0con">
+        <div class="ele"></div>
+    </div>
+
+    <div id="a b c">asas</div>
+    
+
+    <script>
+        
+        const wrap = document.getElementById('item')
+        let n=0
+        
+
+        function chrome(sizeW=400, sizeH=300, posX=0, posY=0) {
+            // create
+            let overlay = document.createElement('div')
+            let inner = document.createElement('div')
+            let icon1 = document.createElement('i')
+
+            // node setting
+            wrap.appendChild(overlay)
+            overlay.appendChild(inner)
+            inner.appendChild(icon1)
+
+            //add id code
+            overlay.setAttribute('id',`${n}over`)
+            inner.setAttribute('id',`${n}inner`)
+            // let ice = ["a", "b", "c"]
+            // icon1.setAttribute("id",`a b c`)
+            icon1.setAttribute('id',`${n}icon`)
+            
+            // icons
+            icon1.setAttribute('class',`material-icons a`)
+
+            // made icon
+            icon1.innerText = "close"
+
+            // node style
+            
+
+            //made differnce
+            n++
+        }
+
+        chrome()
+
+        const con0 = document.getElementById('0con')
+        const inner0 = document.getElementById('0inner')
+
+        inner0.appendChild(con0)
+        
+
+
+    </script>
+</body>
+</html>
