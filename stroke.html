@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0px;
+      margin: 0px;
+    }
+
+    html{
+      /* cursor: none; */
+    }
+
+    #canvas{
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d')
+    canvas.width=window.innerWidth
+    canvas.height=window.innerHeight
+
+    let mouseX
+    let mouseY
+    window.addEventListener('mousemove',function(e){
+      mouseX=window.innerWidth-e.clientX
+      mouseY=window.innerHeight-e.clientY
+    })
+
+    let animate
+
+    let lineheight = window.innerHeight/7
+    let lineWidth = window.innerWidth/7
+
+    function stroke(){
+
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+
+      // ctx.beginPath();
+      // ctx.moveTo(0, window.innerHeight/2)
+      // ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, window.innerWidth, window.innerHeight/2)
+      // ctx.lineWidth = 1;
+      // ctx.strokeStyle = '#000000';
+      // ctx.stroke()
+
+
+      ctx.beginPath();
+      ctx.moveTo(0, lineheight*0)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, window.innerWidth, lineheight*0)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+      
+      ctx.beginPath();
+      ctx.moveTo(0, lineheight*1)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, window.innerWidth, lineheight*1)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(0, lineheight*2)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, window.innerWidth, lineheight*2)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(0, lineheight*3)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, window.innerWidth, lineheight*3)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(0, lineheight*4)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, window.innerWidth, lineheight*4)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(0, lineheight*5)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, window.innerWidth, lineheight*5)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(0, lineheight*6)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, window.innerWidth, lineheight*6)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(0, lineheight*7)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, window.innerWidth, lineheight*7)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+      
+      
+
+      ctx.beginPath();
+      ctx.moveTo(lineWidth*0, 0)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, lineWidth*0, window.innerHeight)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(lineWidth*1, 0)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, lineWidth*1, window.innerHeight)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(lineWidth*2, 0)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, lineWidth*2, window.innerHeight)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(lineWidth*3, 0)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, lineWidth*3, window.innerHeight)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(lineWidth*4, 0)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, lineWidth*4, window.innerHeight)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(lineWidth*5, 0)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, lineWidth*5, window.innerHeight)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(lineWidth*6, 0)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, lineWidth*6, window.innerHeight)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+      ctx.beginPath();
+      ctx.moveTo(lineWidth*7, 0)
+      ctx.bezierCurveTo(mouseX, mouseY, mouseX, mouseY, lineWidth*7, window.innerHeight)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#000000';
+      ctx.stroke()
+
+
+
+
+
+
+      animate = requestAnimationFrame(stroke)
+    }
+    stroke()
+  </script>
+</body>
+</html>

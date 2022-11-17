@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0px;
+      margin: 0px;
+    }
+
+    html{
+      background-color: #000;
+    }
+
+    #canvas{
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+    }
+
+    #result{
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas">이 브라우저는 캔버스를 지원하지 않습니다. 다른브라우저를 이용하거나 브라우저를 업데이트 하여 주십시오</canvas>
+  <div id="result"></div>
+  <script>
+    // 객체 가져오기
+    const result = document.getElementById('result')
+
+    // 캔버스 가져오기
+    const canvas = document.getElementById("canvas");
+    canvas.width= window.innerWidth
+    canvas.height= window.innerHeight
+    const ctx = canvas.getContext("2d");
+    let lineposY=window.innerHeight/2
+    let lineposX=window.innerWidth/20
+
+    
+    // 캔버스 변수로 설정
+    window.addEventListener('resize',function(){
+      canvas.width= window.innerWidth
+      canvas.height= window.innerHeight
+      lineposY=window.innerHeight/2
+      lineposX=window.innerWidth/20
+    })
+    
+    
+    // 어래이 생성
+    let wavebottom = new Array(10)
+    let wavetop = new Array(10)
+    let wavepos = new Array(10)
+    let wavestatus = new Array(10)
+    
+    // 기본값 설정
+    let width =75
+    let speed = 1
+
+
+    // 어래이에 기본값 삽입
+    for(i=0;i<wavebottom.length;i++){
+      wavebottom[i] = Math.floor(Math.random()*-width)+(-width/4)
+    }
+    
+    for(i=0;i<wavetop.length;i++){
+      wavetop[i] = Math.floor(Math.random()*width)+(width/4)
+    }
+
+    for(i=0;i<wavepos.length;i++){
+      wavepos[i] = Math.floor(Math.random()*(wavetop[i]+Math.abs(wavebottom[i])))+wavebottom[i]
+    }
+
+    for(i=0;i<wavestatus.length;i++){
+      wavestatus[i] = 0
+    }
+
+    // 확인
+    console.log(wavebottom)
+    console.log(wavetop)
+    console.log(wavepos)
+    console.log(wavestatus)
+
+    // 애니메이션 생성
+    let waveanimate
+    let cool = 0
+
+    
+
+    console.log(wavepos)
+    result.innerText=wavepos
+
+    let color01 = '#fff'
+    let color02 = '#00aeff'
+    let color03 = '#0059ff'
+
+    function wave() {
+      cool++
+      if(cool>=1){
+        
+        for(i=0;i<wavestatus.length;i++){
+          if(wavestatus[i]==0){
+            if(wavepos[i]<wavetop[i]){
+              wavepos[i]+=speed
+            }else{
+              wavestatus[i]=1
+              wavepos[i]-=speed
+            }
+          }else{
+            if(wavepos[i]>wavebottom[i]){
+              wavepos[i]-=speed
+            }else{
+              wavestatus[i]=0
+              wavepos[i]+=speed
+            }
+          }
+        }
+
+
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+
+        ctx.beginPath();
+        ctx.moveTo(lineposX*0, lineposY)
+        ctx.lineTo(lineposX*1, lineposY+(wavepos[0]))
+        ctx.lineTo(lineposX*3, lineposY+(wavepos[1]))
+        ctx.lineTo(lineposX*5, lineposY+(wavepos[2]))
+        ctx.lineTo(lineposX*7, lineposY+(wavepos[3]))
+        ctx.lineTo(lineposX*9, lineposY+(wavepos[4]))
+        ctx.lineTo(lineposX*11, lineposY+(wavepos[5]))
+        ctx.lineTo(lineposX*13, lineposY+(wavepos[6]))
+        ctx.lineTo(lineposX*15, lineposY+(wavepos[7]))
+        ctx.lineTo(lineposX*17, lineposY+(wavepos[8]))
+        ctx.lineTo(lineposX*19, lineposY+(wavepos[9]))
+        ctx.lineTo(lineposX*20, lineposY)
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = color01;
+        ctx.stroke()
+        
+        ctx.beginPath();
+        ctx.moveTo(lineposX*0, lineposY)
+        ctx.lineTo(lineposX*3, lineposY+(wavepos[1]))
+        ctx.lineTo(lineposX*7, lineposY+(wavepos[3]))
+        ctx.lineTo(lineposX*11, lineposY+(wavepos[5]))
+        ctx.lineTo(lineposX*15, lineposY+(wavepos[7]))
+        ctx.lineTo(lineposX*19, lineposY+(wavepos[9]))
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = color01;
+        ctx.stroke()
+
+        ctx.beginPath();
+        ctx.moveTo(lineposX*1, lineposY+(wavepos[0]))
+        ctx.lineTo(lineposX*5, lineposY+(wavepos[2]))
+        ctx.lineTo(lineposX*9, lineposY+(wavepos[4]))
+        ctx.lineTo(lineposX*13, lineposY+(wavepos[6]))
+        ctx.lineTo(lineposX*17, lineposY+(wavepos[8]))
+        ctx.lineTo(lineposX*20, lineposY)
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = color01;
+        ctx.stroke()
+
+        ctx.font = '80px serif';
+        ctx.fillStyle=color01;
+        ctx.fillText('W', lineposX*5-25, lineposY+(wavepos[2])-30);
+
+        ctx.font = '48px serif';
+        ctx.fillStyle=color01;
+        ctx.fillText('A', lineposX*11-25, lineposY+(wavepos[5])-30);
+
+        ctx.font = '65px serif';
+        ctx.fillStyle=color01;
+        ctx.fillText('V', lineposX*13-25, lineposY+(wavepos[6])-30);
+
+        ctx.font = '32px serif';
+        ctx.fillStyle=color01;
+        ctx.fillText('E', lineposX*17-25, lineposY+(wavepos[8])-30);
+
+        result.innerText=wavepos
+        cool=0
+      }
+      waveanimate = requestAnimationFrame(wave)
+    }
+
+    wave()
+  </script>
+</body>
+</html>
