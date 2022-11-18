@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    *{
+      padding: 0px;
+      margin: 0px;
+    }
+    html{
+      overflow: hidden;
+    }
+    #canvas{
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas')
+    canvas.width=window.innerWidth
+    canvas.height=window.innerHeight
+    const ctx = canvas.getContext('2d')
+    
+    window.addEventListener('resize',function(){
+      canvas.width=window.innerWidth
+      canvas.height=window.innerHeight
+    })
+
+    let animate 
+
+    let mouseX
+    let mouseY = 0
+    let mouseY2
+    let animateY = 0
+    let animate_status = 0
+
+    window.addEventListener('mouseup', function(e){
+      mouseX=e.clientX
+      animate_status = 1
+    })
+
+    function ani() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+
+      if(animate_status===1){
+        animateY=200
+        animate_status=2
+      }
+      if(animate_status===2){
+        if(animateY>-160){
+          animateY-=40
+        }else{
+          animate_status=3
+        }
+      }
+      if(animate_status===3){
+        if(animateY<120){
+          animateY+=40
+        }else{
+          animate_status=4
+        }
+      }
+      if(animate_status===4){
+        if(animateY>-60){
+          animateY-=20
+        }else{
+          animate_status=5
+        }
+      }
+      if(animate_status===5){
+        if(animateY<60){
+          animateY+=20
+        }else{
+          animate_status=6
+        }
+      }
+      if(animate_status===6){
+        if(animateY>0){
+          animateY-=10
+        }else{
+          animate_status=0
+        }
+      }
+
+      mouseY2 = mouseY+animateY
+      
+      ctx.beginPath()
+      ctx.moveTo(0, window.innerHeight/2+30)
+      ctx.bezierCurveTo(mouseX, window.innerHeight/2+mouseY2+30, mouseX, window.innerHeight/2+mouseY2+30, window.innerWidth, window.innerHeight/2+30)
+      ctx.lineTo(window.innerWidth, window.innerHeight/2-30)
+      ctx.bezierCurveTo(mouseX, window.innerHeight/2+mouseY2-30, mouseX, window.innerHeight/2+mouseY2-30, 0, window.innerHeight/2-30)
+      ctx.lineTo(0, window.innerHeight/2+30)
+      // ctx.lineTo(window.innerWidth, window.innerHeight/2)
+      ctx.fillStyle='#f00'
+      ctx.fill()
+
+      animate = requestAnimationFrame(ani)
+    }
+
+    ani()
+
+  </script>
+</body>
+</html>
