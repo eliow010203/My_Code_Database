@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0px;
+      margin: 0px;
+    }
+
+    html{
+      overflow: hidden;
+    }
+
+    #canvas{
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d')
+
+    let ww = window.innerWidth
+    let wh = window.innerHeight
+    
+    canvas.width=ww
+    canvas.height=wh
+    
+    window.addEventListener('resize', function(){
+      ww = window.innerWidth
+      wh = window.innerHeight
+      canvas.width=ww
+      canvas.height=wh
+    })
+
+    let animate
+
+    let rectposX = ww/2
+    let rectposY = wh/2
+
+
+    let boxSizeW = 300
+    let boxSizeH = 300
+
+    let mouseStatus = 0
+
+    window.addEventListener('mousedown',function(){
+      mouseStatus=1
+    })
+
+    window.addEventListener('mousemove',function(e){
+      if(mouseStatus==1){
+        rectposX=e.clientX
+        rectposY=e.clientY
+      }
+    })
+
+    window.addEventListener('mouseup',function(){
+      mouseStatus=0
+    })
+
+    function anime(){
+
+      ctx.clearRect(0, 0, ww, wh)
+
+
+      
+      // ctx.fillRect(rectposX-boxSizeW/2, rectposY-boxSizeH/2, boxSizeW, boxSizeH)
+
+      
+
+
+
+
+      // 좌
+      
+      // 왼위
+      ctx.beginPath()
+      ctx.moveTo(rectposX-boxSizeW/2, rectposY-boxSizeH/2)
+      ctx.lineTo(ww/2-boxSizeW/2, wh/2-boxSizeH/2)
+
+      // 왼아래
+      ctx.lineTo(ww/2-boxSizeW/2, wh/2+boxSizeH/2)
+      ctx.lineTo(rectposX-boxSizeW/2, rectposY+boxSizeH/2)
+
+      ctx.fillStyle=`red`
+      ctx.fill()
+      
+      // 하
+
+      // 왼아래
+      ctx.beginPath()
+      ctx.moveTo(rectposX-boxSizeW/2, rectposY+boxSizeH/2)
+      ctx.lineTo(ww/2-boxSizeW/2, wh/2+boxSizeH/2)
+
+      // 오아래
+      ctx.lineTo(ww/2+boxSizeW/2, wh/2+boxSizeH/2)
+      ctx.lineTo(rectposX+boxSizeW/2, rectposY+boxSizeH/2)
+
+      ctx.fillStyle=`red`
+      ctx.fill()
+      
+      // 상
+
+      // 오위
+      ctx.beginPath()
+      ctx.moveTo(rectposX+boxSizeW/2, rectposY-boxSizeH/2)
+      ctx.lineTo(ww/2+boxSizeW/2, wh/2-boxSizeH/2)
+
+      // 왼위
+      ctx.lineTo(ww/2-boxSizeW/2, wh/2-boxSizeH/2)
+      ctx.lineTo(rectposX-boxSizeW/2, rectposY-boxSizeH/2)
+
+      ctx.fillStyle=`aqua`
+      ctx.fill()
+
+      // 우
+      
+      // 오아래
+      ctx.beginPath()
+      ctx.moveTo(rectposX+boxSizeW/2, rectposY+boxSizeH/2)
+      ctx.lineTo(ww/2+boxSizeW/2, wh/2+boxSizeH/2)
+
+      // 오위
+      ctx.lineTo(ww/2+boxSizeW/2, wh/2-boxSizeH/2)
+      ctx.lineTo(rectposX+boxSizeW/2, rectposY-boxSizeH/2)
+
+      ctx.fillStyle=`orange`
+      ctx.fill()
+
+      
+      ctx.beginPath()
+      ctx.moveTo(rectposX-boxSizeW/2, rectposY-boxSizeH/2)
+      ctx.lineTo(rectposX+boxSizeW/2, rectposY-boxSizeH/2)
+      ctx.lineTo(rectposX+boxSizeW/2, rectposY+boxSizeH/2)
+      ctx.lineTo(rectposX-boxSizeW/2, rectposY+boxSizeH/2)
+      ctx.fillStyle=`blue`
+      ctx.fill()
+
+
+      animate = requestAnimationFrame(anime)
+    }
+    anime()
+  </script>
+  
+</body>
+</html>
